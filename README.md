@@ -82,7 +82,7 @@ $ docker run -it --gpus all --name darknet_training\
 ```
 ./darknet detector train obj.data yolo-obj.cfg yolov4.conv.137 -map -dont_show
 ```
-##Running the container in detached mode:
+## Running the container in detached mode:
 #### YOLOv3
 ```
 $ docker run -it --gpus all --name darknet_training -d\
