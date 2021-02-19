@@ -18,11 +18,11 @@ $ docker run -it --gpus all --net host -e DISPLAY=$DISPLAY -v $HOME/.Xauthority:
 
 
 ### Test it
-####YOLOv4
+#### YOLOv4
 ```
 $ ./darknet detector test ./cfg/coco.data ./cfg/yolov4.cfg yolov4.weights data/dog.jpg -dont_show
 ```
-####YOLOv3
+#### YOLOv3
 ```
 $ ./darknet detector test ./cfg/coco.data ./cfg/yolov3.cfg yolov3.weights data/dog.jpg -dont_show
 ```
@@ -74,16 +74,16 @@ $ docker run -it --gpus all --name darknet_training\
   
 ```  
 ### Inside the running container (/darknet#):
-####YOLOv3
+#### YOLOv3
 ```
 ./darknet detector train obj.data yolo-obj.cfg darknet53.conv.74 -map -dont_show
 ```
-####YOLOv4
+#### YOLOv4
 ```
 ./darknet detector train obj.data yolo-obj.cfg yolov4.conv.137 -map -dont_show
 ```
 ##Running the container in detached mode:
-####YOLOv3
+#### YOLOv3
 ```
 $ docker run -it --gpus all --name darknet_training -d\
   -v '${PWD}/dataset/data/obj:/darknet/data/obj' \
@@ -96,7 +96,7 @@ $ docker run -it --gpus all --name darknet_training -d\
   docker-darknet_yolo:latest ./darknet detector train obj.data yolo-obj.cfg darknet53.conv.74 -map -dont_show
 ```
 
-####YOLOv4
+#### YOLOv4
 ```
 $ docker run -it --gpus all --name darknet_training -d\
   -v '${PWD}/dataset/data/obj:/darknet/data/obj' \
