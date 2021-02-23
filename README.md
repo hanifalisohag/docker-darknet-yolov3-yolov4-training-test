@@ -135,7 +135,7 @@ $ docker rm -f darknet_training
 ```
 
 ## To continue a finished training
-We can change the iteration number of the config file **yolo-obj.cfg** and restart the training from where we stopped or finised training (Suppose, it was **100200**). You need to change the following lines 150200 and steps would be 80% (120160), 90% (135180)
+We can change the iteration number of the config file located at **/dataset/yolo-obj.cfg** and restart the training from where we stopped or finised training (Suppose, it was **100200**). You need to change the following lines 150200 and steps would be 80% (120160), 90% (135180)
 
 ```
 max_batches = 150200
