@@ -86,26 +86,26 @@ $ docker run -it --gpus all --name darknet_training\
 #### YOLOv3
 ```
 $ docker run -it --gpus all --name darknet_training -d\
-  -v $(pwd)/dataset/data/obj:/darknet/data/obj \
-  -v $(pwd)/dataset/data/val.txt:/darknet/data/val.txt \
-  -v $(pwd)/dataset/data/train.txt:/darknet/data/train.txt \
-  -v $(pwd)/dataset/data/yolo-obj.names:/darknet/data/yolo-obj.names \
-  -v $(pwd)/dataset/obj.data:/darknet/obj.data \
-  -v $(pwd)/dataset/yolo-obj.cfg:/darknet/yolo-obj.cfg \
-  -v $(pwd)/dataset/backup:/darknet/backup \
+  -v '${PWD}/dataset/data/obj:/darknet/data/obj' \
+  -v '${PWD}/dataset/data/val.txt:/darknet/data/val.txt' \
+  -v '${PWD}/dataset/data/train.txt:/darknet/data/train.txt' \
+  -v '${PWD}/dataset/data/yolo-obj.names:/darknet/data/yolo-obj.names' \
+  -v '${PWD}/dataset/obj.data:/darknet/obj.data' \
+  -v '${PWD}/dataset/yolo-obj.cfg:/darknet/yolo-obj.cfg' \
+  -v '${PWD}/dataset/backup:/darknet/backup' \
   docker-darknet_yolo:latest ./darknet detector train obj.data yolo-obj.cfg darknet53.conv.74 -map -dont_show
 ```
 
 #### YOLOv4
 ```
 $ docker run -it --gpus all --name darknet_training -d\
-  -v $(pwd)/dataset/data/obj:/darknet/data/obj \
-  -v $(pwd)/dataset/data/val.txt:/darknet/data/val.txt \
-  -v $(pwd)/dataset/data/train.txt:/darknet/data/train.txt \
-  -v $(pwd)/dataset/data/yolo-obj.names:/darknet/data/yolo-obj.names \
-  -v $(pwd)/dataset/obj.data:/darknet/obj.data \
-  -v $(pwd)/dataset/yolo-obj.cfg:/darknet/yolo-obj.cfg \
-  -v $(pwd)/dataset/backup:/darknet/backup \
+  -v '${PWD}/dataset/data/obj:/darknet/data/obj' \
+  -v '${PWD}/dataset/data/val.txt:/darknet/data/val.txt' \
+  -v '${PWD}/dataset/data/train.txt:/darknet/data/train.txt' \
+  -v '${PWD}/dataset/data/yolo-obj.names:/darknet/data/yolo-obj.names' \
+  -v '${PWD}/dataset/obj.data:/darknet/obj.data' \
+  -v '${PWD}/dataset/yolo-obj.cfg:/darknet/yolo-obj.cfg' \
+  -v '${PWD}/dataset/backup:/darknet/backup' \
   docker-darknet_yolo:latest ./darknet detector train obj.data yolo-obj.cfg yolov4.conv.137 -map -dont_show
 ```
 
@@ -152,12 +152,50 @@ Now, to start the training run the following command again. Please change the la
 
 ```
 $ docker run -it --gpus all --name darknet_training -d\
-  -v $(pwd)/dataset/data/obj:/darknet/data/obj \
-  -v $(pwd)/dataset/data/val.txt:/darknet/data/val.txt \
-  -v $(pwd)/dataset/data/train.txt:/darknet/data/train.txt \
-  -v $(pwd)/dataset/data/yolo-obj.names:/darknet/data/yolo-obj.names \
-  -v $(pwd)/dataset/obj.data:/darknet/obj.data \
-  -v $(pwd)/dataset/yolo-obj.cfg:/darknet/yolo-obj.cfg \
-  -v $(pwd)/dataset/backup:/darknet/backup \
+  -v '${PWD}/dataset/data/obj:/darknet/data/obj' \
+  -v '${PWD}/dataset/data/val.txt:/darknet/data/val.txt' \
+  -v '${PWD}/dataset/data/train.txt:/darknet/data/train.txt' \
+  -v '${PWD}/dataset/data/yolo-obj.names:/darknet/data/yolo-obj.names' \
+  -v '${PWD}/dataset/obj.data:/darknet/obj.data' \
+  -v '${PWD}/dataset/yolo-obj.cfg:/darknet/yolo-obj.cfg' \
+  -v '${PWD}/dataset/backup:/darknet/backup' \
   docker-darknet_yolo:latest ./darknet detector train obj.data yolo-obj.cfg backup/yolo-obj_100000.weights -map
+```
+
+## Building on a Xavier
+
+```
+$ sudo docker build -f Dockerfile_jetson -t docker-darknet_yolo:latest .
+
+$ sudo docker run -it --runtime=nvidia docker-darknet_yolo:latest
+
+# run inside the docker container to succefully build darknet with NVIDIA GPU Runtime
+$ root@4b397cef37d7:/darknet# make
+$ exit
+
+#To get the container ID (then check for the last stopped/exited container)
+$ sudo docker ps -a
+
+$ sudo docker commit 4b397cef37d7 docker-darknet_yolo:latest
+```
+
+## Running on a Xavier
+```
+$ sudo docker run -it --runtime=nvidia docker-darknet_yolo:latest
+
+#inside the container
+$ ./darknet detector test ./cfg/coco.data ./cfg/yolov4.cfg yolov4.weights data/dog.jpg -dont_show
+```
+
+## Running on a Xavier with GUI
+
+```
+xhost +
+
+#With GUI X11
+$ sudo docker run -it --runtime=nvidia --net host -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix docker-darknet_yolo:latest
+
+#inside the container
+$ ./darknet detector test ./cfg/coco.data ./cfg/yolov4.cfg yolov4.weights data/dog.jpg
+
 ```
