@@ -190,7 +190,7 @@ $ ./darknet detector test ./cfg/coco.data ./cfg/yolov4.cfg yolov4.weights data/d
 ## Running on a Xavier with GUI
 
 ```
-xhost +
+$ xhost +
 
 #With GUI X11
 $ sudo docker run -it --runtime=nvidia --net host -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix docker-darknet_yolo:latest
