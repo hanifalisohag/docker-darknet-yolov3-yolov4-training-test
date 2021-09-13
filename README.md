@@ -202,4 +202,4 @@ $ ./darknet detector test ./cfg/coco.data ./cfg/yolov4.cfg yolov4.weights data/d
 
 ## Output
 
-![Alt text](result.jpg?raw=true "After running in docker")
+![Alt text](results.jpg?raw=true "After running in docker")
