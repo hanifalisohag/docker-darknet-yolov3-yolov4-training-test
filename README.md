@@ -63,13 +63,13 @@ $ python3 train_test_split.py
 ## Run the following command to start the training (Manually)
 ```
 $ docker run -it --gpus all --name darknet_training\
-  -v '${PWD}/dataset/data/obj:/darknet/data/obj' \
-  -v '${PWD}/dataset/data/val.txt:/darknet/data/val.txt' \
-  -v '${PWD}/dataset/data/train.txt:/darknet/data/train.txt' \
-  -v '${PWD}/dataset/data/yolo-obj.names:/darknet/data/yolo-obj.names' \
-  -v '${PWD}/dataset/obj.data:/darknet/obj.data' \
-  -v '${PWD}/dataset/yolo-obj.cfg:/darknet/yolo-obj.cfg' \
-  -v '${PWD}/dataset/backup:/darknet/backup' \
+  -v '$(PWD)/dataset/data/obj:/darknet/data/obj' \
+  -v '$(PWD)/dataset/data/val.txt:/darknet/data/val.txt' \
+  -v '$(PWD)/dataset/data/train.txt:/darknet/data/train.txt' \
+  -v '$(PWD)/dataset/data/yolo-obj.names:/darknet/data/yolo-obj.names' \
+  -v '$(PWD)/dataset/obj.data:/darknet/obj.data' \
+  -v '$(PWD)/dataset/yolo-obj.cfg:/darknet/yolo-obj.cfg' \
+  -v '$(PWD)/dataset/backup:/darknet/backup' \
   docker-darknet_yolo:latest /bin/bash
   
 ```  
@@ -86,26 +86,26 @@ $ docker run -it --gpus all --name darknet_training\
 #### YOLOv3
 ```
 $ docker run -it --gpus all --name darknet_training -d\
-  -v '${PWD}/dataset/data/obj:/darknet/data/obj' \
-  -v '${PWD}/dataset/data/val.txt:/darknet/data/val.txt' \
-  -v '${PWD}/dataset/data/train.txt:/darknet/data/train.txt' \
-  -v '${PWD}/dataset/data/yolo-obj.names:/darknet/data/yolo-obj.names' \
-  -v '${PWD}/dataset/obj.data:/darknet/obj.data' \
-  -v '${PWD}/dataset/yolo-obj.cfg:/darknet/yolo-obj.cfg' \
-  -v '${PWD}/dataset/backup:/darknet/backup' \
+  -v '$(PWD)/dataset/data/obj:/darknet/data/obj' \
+  -v '$(PWD)/dataset/data/val.txt:/darknet/data/val.txt' \
+  -v '$(PWD)/dataset/data/train.txt:/darknet/data/train.txt' \
+  -v '$(PWD)/dataset/data/yolo-obj.names:/darknet/data/yolo-obj.names' \
+  -v '$(PWD)/dataset/obj.data:/darknet/obj.data' \
+  -v '$(PWD)/dataset/yolo-obj.cfg:/darknet/yolo-obj.cfg' \
+  -v '$(PWD)/dataset/backup:/darknet/backup' \
   docker-darknet_yolo:latest ./darknet detector train obj.data yolo-obj.cfg darknet53.conv.74 -map -dont_show
 ```
 
 #### YOLOv4
 ```
 $ docker run -it --gpus all --name darknet_training -d\
-  -v '${PWD}/dataset/data/obj:/darknet/data/obj' \
-  -v '${PWD}/dataset/data/val.txt:/darknet/data/val.txt' \
-  -v '${PWD}/dataset/data/train.txt:/darknet/data/train.txt' \
-  -v '${PWD}/dataset/data/yolo-obj.names:/darknet/data/yolo-obj.names' \
-  -v '${PWD}/dataset/obj.data:/darknet/obj.data' \
-  -v '${PWD}/dataset/yolo-obj.cfg:/darknet/yolo-obj.cfg' \
-  -v '${PWD}/dataset/backup:/darknet/backup' \
+  -v '$(PWD)/dataset/data/obj:/darknet/data/obj' \
+  -v '$(PWD)/dataset/data/val.txt:/darknet/data/val.txt' \
+  -v '$(PWD)/dataset/data/train.txt:/darknet/data/train.txt' \
+  -v '$(PWD)/dataset/data/yolo-obj.names:/darknet/data/yolo-obj.names' \
+  -v '$(PWD)/dataset/obj.data:/darknet/obj.data' \
+  -v '$(PWD)/dataset/yolo-obj.cfg:/darknet/yolo-obj.cfg' \
+  -v '$(PWD)/dataset/backup:/darknet/backup' \
   docker-darknet_yolo:latest ./darknet detector train obj.data yolo-obj.cfg yolov4.conv.137 -map -dont_show
 ```
 
@@ -152,13 +152,13 @@ Now, to start the training run the following command again. Please change the la
 
 ```
 $ docker run -it --gpus all --name darknet_training -d\
-  -v '${PWD}/dataset/data/obj:/darknet/data/obj' \
-  -v '${PWD}/dataset/data/val.txt:/darknet/data/val.txt' \
-  -v '${PWD}/dataset/data/train.txt:/darknet/data/train.txt' \
-  -v '${PWD}/dataset/data/yolo-obj.names:/darknet/data/yolo-obj.names' \
-  -v '${PWD}/dataset/obj.data:/darknet/obj.data' \
-  -v '${PWD}/dataset/yolo-obj.cfg:/darknet/yolo-obj.cfg' \
-  -v '${PWD}/dataset/backup:/darknet/backup' \
+  -v '$(PWD)/dataset/data/obj:/darknet/data/obj' \
+  -v '$(PWD)/dataset/data/val.txt:/darknet/data/val.txt' \
+  -v '$(PWD)/dataset/data/train.txt:/darknet/data/train.txt' \
+  -v '$(PWD)/dataset/data/yolo-obj.names:/darknet/data/yolo-obj.names' \
+  -v '$(PWD)/dataset/obj.data:/darknet/obj.data' \
+  -v '$(PWD)dataset/yolo-obj.cfg:/darknet/yolo-obj.cfg' \
+  -v '$(PWD)/dataset/backup:/darknet/backup' \
   docker-darknet_yolo:latest ./darknet detector train obj.data yolo-obj.cfg backup/yolo-obj_100000.weights -map
 ```
 
