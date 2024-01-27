@@ -1,5 +1,5 @@
-FROM nvidia/cuda:10.2-cudnn8-devel-ubuntu18.04
-LABEL maintainer "Md Hanif Ali Sohag <hanifalisohag@gmail.com>"
+FROM nvidia/cuda:11.1.1-cudnn8-devel-ubuntu18.04
+
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update
@@ -33,13 +33,21 @@ WORKDIR  /
 RUN git clone https://github.com/AlexeyAB/darknet.git
 WORKDIR  /darknet
 #Update Makefile
-RUN sed -i '1 s/GPU=0/GPU=1/' Makefile
-RUN sed -i '2 s/CUDNN=0/CUDNN=1/' Makefile
-RUN sed -i '3 s/CUDNN_HALF=0/CUDNN_HALF=1/' Makefile
-RUN sed -i '4 s/OPENCV=0/OPENCV=1/' Makefile
+# RUN sed -i '1 s/GPU=0/GPU=1/' Makefile
+# RUN sed -i '2 s/CUDNN=0/CUDNN=1/' Makefile
+# RUN sed -i '3 s/CUDNN_HALF=0/CUDNN_HALF=1/' Makefile
+# RUN sed -i '4 s/OPENCV=0/OPENCV=1/' Makefile
+
+
+RUN sed -i 's/GPU=0/GPU=1/' Makefile
+RUN sed -i 's/CUDNN=1/CUDNN=1/' Makefile
+RUN sed -i 's/OPENCV=0/OPENCV=1/' Makefile
+
 
 #Compiling Darknet
 RUN make -j$(cat /proc/cpuinfo | grep processor | wc -l)
+
+COPY ./dataset ./data
 
 WORKDIR  /darknet
 RUN wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.conv.137
